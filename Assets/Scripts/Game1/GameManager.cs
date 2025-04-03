@@ -1,45 +1,49 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
-
-    public SegmentUI segmentUI;          // Reference to the UI manager
-    public List<SegmentData> segments;   // List of all segments
-    private int currentSegmentIndex = 0; // Tracks the current segment
+    public static GameManager Instance;
+    public List<SegmentData> allSegments; // All available segments
+    private List<SegmentData> shuffledSegments; // Shuffled version
+    private int currentSegmentIndex = 0;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject); // Keep GameManager alive across scenes
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     private void Start()
     {
-        LoadNextSegment(); // Load the first segment at startup
+        ShuffleSegments();
+        LoadNextSegment();
+    }
+
+    // 🔀 Shuffle the segments randomly
+    private void ShuffleSegments()
+    {
+        shuffledSegments = new List<SegmentData>(allSegments);
+        for (int i = 0; i < shuffledSegments.Count; i++)
+        {
+            SegmentData temp = shuffledSegments[i];
+            int randomIndex = Random.Range(i, shuffledSegments.Count);
+            shuffledSegments[i] = shuffledSegments[randomIndex];
+            shuffledSegments[randomIndex] = temp;
+        }
     }
 
     public void LoadNextSegment()
     {
-        if (currentSegmentIndex < segments.Count)
+        if (currentSegmentIndex < shuffledSegments.Count)
         {
-            segmentUI.SetSegment(segments[currentSegmentIndex]);
+            FindObjectOfType<SegmentUI>().SetSegment(shuffledSegments[currentSegmentIndex]);
             currentSegmentIndex++;
         }
         else
         {
-            Debug.Log("Game Over! All segments completed.");
-            // You can add a results screen or reset logic here
+            Debug.Log("All segments completed!");
+            // Handle end of game here
         }
     }
 }

@@ -7,7 +7,10 @@ public class SegmentUI : MonoBehaviour
     public Image[] flagButtons;      // Image components for flag choices
     public Button[] flagButtonRefs;  // Button components for interactivity
     public Button speakerButton;     // Button to play audio
-    public AudioSource audioSource;  // Audio source for greeting sounds
+    public AudioSource audioSource;     // AudioSource for greeting audio
+    public AudioSource sfxSource;       // AudioSource for playing SFX (one-shot)
+    public AudioClip correctSFX;        // Sound effect for a correct answer
+    public AudioClip wrongSFX;       // Sound effect for a wrong answer
     public Text scoreText; // Score display
     public Button nextButton;        // Next segment button (Initially hidden)
 
@@ -44,26 +47,37 @@ public class SegmentUI : MonoBehaviour
     }
 
     public void CheckAnswer(string selectedFlagName)
+{
+    // Disable all buttons to prevent multiple answers
+    foreach (Button btn in flagButtonRefs)
     {
-        // Disable all buttons to prevent multiple answers
-        foreach (Button btn in flagButtonRefs)
-        {
-            btn.interactable = false;
-        }
-
-        if (selectedFlagName == correctAnswer)
-        {
-            Debug.Log("Correct! 🎉");
-            score += 10;
-        }
-        else
-        {
-            Debug.Log("Wrong! ❌");
-        }
-
-        scoreText.text = "Score: " + score;
-        nextButton.gameObject.SetActive(true); // Show next button
+        btn.interactable = false;
     }
+
+    // Play correct or wrong SFX
+    if (selectedFlagName == correctAnswer)
+    {
+        Debug.Log("Correct! 🎉");
+        score += 10;
+        if (correctSFX != null)
+        {
+            sfxSource.PlayOneShot(correctSFX);
+        }
+    }
+    else
+    {
+        Debug.Log("Wrong! ❌");
+        score -= 5;
+        if (wrongSFX != null)
+        {
+            sfxSource.PlayOneShot(wrongSFX);
+        }
+    }
+
+    scoreText.text = "Score: " + score;
+    nextButton.gameObject.SetActive(true); // Show next button
+}
+
 
     public void NextSegment()
     {

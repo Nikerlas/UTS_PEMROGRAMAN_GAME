@@ -261,6 +261,9 @@ MonoBehaviour:
   - {fileID: 742123390}
   speakerButton: {fileID: 1890591923}
   audioSource: {fileID: 29476406}
+  sfxSource: {fileID: 29476406}
+  correctSFX: {fileID: 8300000, guid: 63c15f999ba9f184c9f393b9a254a340, type: 3}
+  wrongSFX: {fileID: 8300000, guid: 2cb36db4d35501a40a2f36622b0a5e18, type: 3}
   scoreText: {fileID: 161841552}
   nextButton: {fileID: 1327278818}
 --- !u!4 &29476408
@@ -1084,11 +1087,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31460828d1290264caa8b8eeeb89d7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentUI: {fileID: 29476407}
-  segments:
-  - {fileID: 11400000, guid: a3137abc30cd606498e92cd18284cc89, type: 2}
-  - {fileID: 11400000, guid: 4c2d020bbbabf0d4ebca90cabecdb9c8, type: 2}
+  allSegments:
   - {fileID: 11400000, guid: 33a788327c33c6844a60bd11efa872f9, type: 2}
+  - {fileID: 11400000, guid: 4c2d020bbbabf0d4ebca90cabecdb9c8, type: 2}
+  - {fileID: 11400000, guid: a3137abc30cd606498e92cd18284cc89, type: 2}
 --- !u!4 &1195891982
 Transform:
   m_ObjectHideFlags: 0
