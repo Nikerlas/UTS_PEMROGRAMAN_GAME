@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7438d7f95e7af884eb14236689096869, type: 3}
+  m_Name: Indo
+  m_EditorClassIdentifier: 
+  greetingAudio: {fileID: 8300000, guid: b7e884b115eab0245a06fb0966b638f4, type: 3}
+  correctCountry: Indonesia
+  flagChoices:
+  - {fileID: 21300000, guid: 695cde2b57bbf674da5cd80ba24e6b2e, type: 3}
+  - {fileID: 21300000, guid: b39303a48f4d0884387c5f10d14ce10d, type: 3}
+  - {fileID: 21300000, guid: 88f29fe3e9281ef44b7b090421fe1bc6, type: 3}
+  - {fileID: 21300000, guid: d21ee79d2f9c41e4db44aa294ef8275c, type: 3}
+  correctFlagName: Japan
