@@ -10,4 +10,6 @@ public class SegmentData : ScriptableObject
     public string correctCountry;
     public Sprite[] flagChoices;
     public string correctFlagName;
+
+    public string funFact;
 }

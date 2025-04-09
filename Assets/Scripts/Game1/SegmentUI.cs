@@ -24,12 +24,7 @@ public class SegmentUI : MonoBehaviour
 
     void Start()
     {
-        // Sembunyikan popup exit di awal
-        exitPopup.SetActive(false);
 
-        // Tambahkan event listener untuk tombol Exit
-        btnYes.onClick.AddListener(ExitGame);
-        btnNo.onClick.AddListener(CloseExitPopup);
     }
 
     public void SetSegment(SegmentData segment)
