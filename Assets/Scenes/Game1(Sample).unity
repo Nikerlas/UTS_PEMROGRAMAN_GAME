@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +265,9 @@ MonoBehaviour:
   wrongSFX: {fileID: 8300000, guid: 2cb36db4d35501a40a2f36622b0a5e18, type: 3}
   scoreText: {fileID: 161841552}
   nextButton: {fileID: 1327278818}
+  exitPopup: {fileID: 0}
+  btnYes: {fileID: 0}
+  btnNo: {fileID: 0}
 --- !u!4 &29476408
 Transform:
   m_ObjectHideFlags: 0
@@ -1091,6 +1093,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 33a788327c33c6844a60bd11efa872f9, type: 2}
   - {fileID: 11400000, guid: 4c2d020bbbabf0d4ebca90cabecdb9c8, type: 2}
   - {fileID: 11400000, guid: a3137abc30cd606498e92cd18284cc89, type: 2}
+  - {fileID: 11400000, guid: 31f63efc91e68bf42a7d3b04724e5b07, type: 2}
+  - {fileID: 11400000, guid: 7003c2b1434a60c45904209cc01fe093, type: 2}
+  - {fileID: 11400000, guid: 7a3509b86e8a3b24484fc5b06105e109, type: 2}
+  - {fileID: 11400000, guid: bf692df04b793004aa9964d04bf2fb08, type: 2}
 --- !u!4 &1195891982
 Transform:
   m_ObjectHideFlags: 0
