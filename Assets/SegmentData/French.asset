@@ -15,8 +15,9 @@ MonoBehaviour:
   greetingAudio: {fileID: 8300000, guid: 0db853be59f33e94397bc9afeb373f7f, type: 3}
   correctCountry: France
   flagChoices:
-  - {fileID: 21300000, guid: 695cde2b57bbf674da5cd80ba24e6b2e, type: 3}
-  - {fileID: 21300000, guid: 12e09910f17ac584abef6be280718f03, type: 3}
-  - {fileID: 21300000, guid: d21ee79d2f9c41e4db44aa294ef8275c, type: 3}
-  - {fileID: 21300000, guid: 0d76010d297665441b69865697fe76a0, type: 3}
+  - {fileID: 21300000, guid: a28a3e5c59ffe9d40809efdfc232f69e, type: 3}
+  - {fileID: 21300000, guid: 74bc97d51cdf2254f818bcaa668d0632, type: 3}
+  - {fileID: 21300000, guid: 3b6fe3d5d9209cc45883129889abbbb4, type: 3}
+  - {fileID: 21300000, guid: 2a4ef5646a40ec940b266fc0327d8265, type: 3}
   correctFlagName: France
+  funFact: 

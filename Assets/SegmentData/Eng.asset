@@ -15,8 +15,9 @@ MonoBehaviour:
   greetingAudio: {fileID: 8300000, guid: de530164cc5fab740a625b8eca315a45, type: 3}
   correctCountry: America
   flagChoices:
-  - {fileID: 21300000, guid: 12e09910f17ac584abef6be280718f03, type: 3}
-  - {fileID: 21300000, guid: 0d76010d297665441b69865697fe76a0, type: 3}
-  - {fileID: 21300000, guid: b39303a48f4d0884387c5f10d14ce10d, type: 3}
-  - {fileID: 21300000, guid: 1f1812d6c22cd8c469366621e15a3378, type: 3}
+  - {fileID: 21300000, guid: 2d18703322fdf9d4fb138ad7659b8bec, type: 3}
+  - {fileID: 21300000, guid: 74bc97d51cdf2254f818bcaa668d0632, type: 3}
+  - {fileID: 21300000, guid: 0fce21f3c82c05a41901ba6463520c19, type: 3}
+  - {fileID: 21300000, guid: 83ac916b1c6d60b45aefdc740404a697, type: 3}
   correctFlagName: America
+  funFact: 

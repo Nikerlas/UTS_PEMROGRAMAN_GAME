@@ -4,16 +4,34 @@ using UnityEngine.UI;
 
 public class SceneManagement : MonoBehaviour
 {
+    [Header("Scene Settings")]
     public string EscapeScene;
     public bool isEscapeForExit = false;
-    public GameObject exitPopup; // Reference to the exit confirmation popup
+
+    [Header("Exit Popup UI")]
+    public GameObject exitPopup;
+
+    [Header("Pause Menu UI")]
+    public GameObject pausePanel;
+    public Button pauseButton; // 👉 Reference to your Pause button
+
+    private bool isPaused = false;
 
     void Start()
     {
-        // Only hide exitPopup if it exists in this scene
         if (exitPopup != null)
-        {
             exitPopup.SetActive(false);
+
+        if (pausePanel != null)
+            pausePanel.SetActive(false);
+
+        Time.timeScale = 1f;
+        isPaused = false;
+
+        // 👉 Hook up button click
+        if (pauseButton != null)
+        {
+            pauseButton.onClick.AddListener(PauseGame);
         }
     }
 
@@ -21,18 +39,18 @@ public class SceneManagement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // If exitPopup exists and is open, close it
-            if (exitPopup != null && exitPopup.activeSelf) 
+            if (pausePanel != null && pausePanel.activeSelf)
+            {
+                ResumeGame();
+            }
+            else if (exitPopup != null && exitPopup.activeSelf)
             {
                 CancelExit();
             }
             else if (isEscapeForExit)
             {
-                // Show exit popup only if it exists
-                if (exitPopup != null) 
-                {
+                if (exitPopup != null)
                     ShowExitPopup();
-                }
                 else
                 {
                     Application.Quit();
@@ -41,9 +59,55 @@ public class SceneManagement : MonoBehaviour
             }
             else if (!string.IsNullOrEmpty(EscapeScene))
             {
-                SceneManager.LoadScene(EscapeScene); // Switch scene if EscapeScene is set
+                SceneManager.LoadScene(EscapeScene);
+            }
+            else
+            {
+                PauseGame(); // fallback
             }
         }
+    }
+    public void ReturnToMenuLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Level");
+    }
+    public void PauseGame()
+    {
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (pausePanel != null)
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+    }
+
+    public void ShowExitPopup()
+    {
+        if (exitPopup != null)
+            exitPopup.SetActive(true);
+    }
+
+    public void ConfirmExit()
+    {
+        Application.Quit();
+        Debug.Log("Game is exiting");
+    }
+
+    public void CancelExit()
+    {
+        if (exitPopup != null)
+            exitPopup.SetActive(false);
     }
 
     public void SelectGame()
@@ -59,35 +123,11 @@ public class SceneManagement : MonoBehaviour
     public void ExitGame()
     {
         if (exitPopup != null)
-        {
             ShowExitPopup();
-        }
         else
         {
             Application.Quit();
             Debug.Log("Game is exiting");
-        }
-    }
-
-    void ShowExitPopup()
-    {
-        if (exitPopup != null)
-        {
-            exitPopup.SetActive(true);
-        }
-    }
-
-    public void ConfirmExit()
-    {
-        Application.Quit();
-        Debug.Log("Game is exiting");
-    }
-
-    public void CancelExit()
-    {
-        if (exitPopup != null)
-        {
-            exitPopup.SetActive(false);
         }
     }
 }

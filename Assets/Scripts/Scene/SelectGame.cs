@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SelectGame : MonoBehaviour
 {
-    public GameObject[] gameButtons; // Array of GameObjects (your designed buttons)
-    public Button prevButton, nextButton, secretGame; // Prev & Next navigation buttons
+    public GameObject[] gameButtons;
+    public Button prevButton, nextButton, secretGame;
 
-    private int currentIndex = 0; // Track active game index
+    public string[] sceneNames; // 👈 Add this in the Inspector
+    private int currentIndex = 0;
 
     void Start()
     {
@@ -45,15 +47,27 @@ public class SelectGame : MonoBehaviour
 
     void UpdateUI()
     {
-        // Activate only the current game button
         for (int i = 0; i < gameButtons.Length; i++)
         {
             gameButtons[i].SetActive(i == currentIndex);
         }
 
-        // Enable/disable navigation buttons
         prevButton.interactable = currentIndex > 0;
         nextButton.interactable = currentIndex < gameButtons.Length - 1;
-        secretGame.interactable = false;
+
+        secretGame.interactable = false; // Leave secret alone
+    }
+
+    public void StartSelectedGame()
+    {
+        if (currentIndex < sceneNames.Length)
+        {
+            string sceneToLoad = sceneNames[currentIndex];
+            SceneManager.LoadScene(sceneToLoad);
+        }
+        else
+        {
+            Debug.LogWarning("No scene mapped for index: " + currentIndex);
+        }
     }
 }

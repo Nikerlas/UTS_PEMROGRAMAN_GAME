@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -996,7 +995,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1375343181}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030043436}
+        m_TargetAssemblyTypeName: SelectGame, Assembly-CSharp
+        m_MethodName: StartSelectedGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1375343181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1260,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1558625539}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030043436}
+        m_TargetAssemblyTypeName: SelectGame, Assembly-CSharp
+        m_MethodName: StartSelectedGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1558625539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1446,6 +1469,9 @@ MonoBehaviour:
   prevButton: {fileID: 1389475687}
   nextButton: {fileID: 1111360721}
   secretGame: {fileID: 1920105267}
+  sceneNames:
+  - Game1
+  - Game2
 --- !u!4 &2030043437
 Transform:
   m_ObjectHideFlags: 0
@@ -1474,6 +1500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EscapeScene: Menu
+  isEscapeForExit: 0
+  exitPopup: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

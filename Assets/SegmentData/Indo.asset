@@ -15,8 +15,9 @@ MonoBehaviour:
   greetingAudio: {fileID: 8300000, guid: b7e884b115eab0245a06fb0966b638f4, type: 3}
   correctCountry: Indonesia
   flagChoices:
-  - {fileID: 21300000, guid: 695cde2b57bbf674da5cd80ba24e6b2e, type: 3}
-  - {fileID: 21300000, guid: b39303a48f4d0884387c5f10d14ce10d, type: 3}
-  - {fileID: 21300000, guid: 88f29fe3e9281ef44b7b090421fe1bc6, type: 3}
-  - {fileID: 21300000, guid: d21ee79d2f9c41e4db44aa294ef8275c, type: 3}
+  - {fileID: 21300000, guid: 74bc97d51cdf2254f818bcaa668d0632, type: 3}
+  - {fileID: 21300000, guid: 2a4ef5646a40ec940b266fc0327d8265, type: 3}
+  - {fileID: 21300000, guid: 2a7a4a69690029740b4b38601eb0c285, type: 3}
+  - {fileID: 21300000, guid: 0fce21f3c82c05a41901ba6463520c19, type: 3}
   correctFlagName: Indonesia
+  funFact: 
