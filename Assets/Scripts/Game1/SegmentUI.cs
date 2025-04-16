@@ -31,6 +31,10 @@ public class SegmentUI : MonoBehaviour
     public Button btnYes;
     public Button btnNo;
 
+    [Header("Finish Popup")]
+public GameObject finishPopup;
+public Text finalScoreText;
+
     private string correctAnswer;
     private int score = 0;
     private int streak = 0;
@@ -123,7 +127,14 @@ public class SegmentUI : MonoBehaviour
         scoreText.text = "Score: " + score;
         nextButton.gameObject.SetActive(true);
     }
+public void ShowFinishPopup()
+{
+    finishPopup.SetActive(true);
+    Time.timeScale = 0f;
 
+    if (finalScoreText != null)
+        finalScoreText.text = "Score Akhir: " + score;
+}
     public void NextSegment()
     {
         GameManager.Instance.LoadNextSegment();
