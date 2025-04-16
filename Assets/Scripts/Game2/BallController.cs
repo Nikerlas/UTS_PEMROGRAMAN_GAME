@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BallController : MonoBehaviour
 {
-    public GameObject hitSFX;
+    // public GameObject hitSFX;
     public int force;
     Rigidbody2D rigid;
     int Score1;
@@ -12,6 +12,9 @@ public class BallController : MonoBehaviour
     Text ScoreUI1;
     Text ScoreUI2;
     private Rigidbody2D rb;
+
+    GameObject panelSelesai;
+    Text txPemenang;
 
     public int maxBounceSpeed = 800; // batas maksimum force total
     public int bounceIncrement = 50; // berapa besar force ditambahkan setiap pantulan
@@ -23,6 +26,8 @@ public class BallController : MonoBehaviour
     private Vector2 posisiAwalP1;
     private Vector2 posisiAwalP2;
     private int arahSetelahSkor = 1; // 1 = kanan, -1 = kiri
+    public AudioClip hitSFX; // Assign dari Inspector
+    private AudioSource audioSource;
 
 
 
@@ -35,6 +40,7 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         Vector2 arah = new Vector2(2, 0).normalized;
         rigid.AddForce(arah * force);
@@ -42,6 +48,8 @@ public class BallController : MonoBehaviour
         Score2 = 0;
         ScoreUI1 = GameObject.Find("Score1").GetComponent<Text>();
         ScoreUI2 = GameObject.Find("Score2").GetComponent<Text>();
+        panelSelesai = GameObject.Find("PanelSelesai");
+        panelSelesai.SetActive(false);
     }
 
 
@@ -51,11 +59,26 @@ public class BallController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D coll)
     {
+        if (coll.gameObject.CompareTag("paddle") || coll.gameObject.CompareTag("batas"))
+        {
+            if (hitSFX != null)
+            {
+                audioSource.PlayOneShot(hitSFX);
+            }
+        }
         if (coll.gameObject.name == "gawang_kanan")
         {
             ResetBall();
             Score1 += 1;
-            // TampilkanScore();
+            TampilkanScore();
+            if (Score1 == 5)
+            {
+                panelSelesai.SetActive(true);
+                txPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
+                txPemenang.text = "Player Merah Pemenang!";
+                Destroy(gameObject);
+                return;
+            }
             Vector2 arah = new Vector2(2, 0).normalized;
             rigid.AddForce(arah * force);
         }
@@ -63,7 +86,15 @@ public class BallController : MonoBehaviour
         {
             ResetBall();
             Score2 += 1;
-            // TampilkanScore();
+            TampilkanScore();
+            if (Score2 == 5)
+            {
+                panelSelesai.SetActive(true);
+                txPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
+                txPemenang.text = "Player Biru Pemenang!";
+                Destroy(gameObject);
+                return;
+            }
             Vector2 arah = new Vector2(-2, 0).normalized;
             rigid.AddForce(arah * force);
         }

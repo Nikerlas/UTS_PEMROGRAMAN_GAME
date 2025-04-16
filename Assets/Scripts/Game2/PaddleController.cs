@@ -6,8 +6,7 @@ public class PaddleController : MonoBehaviour
     public float batasAtas, batasBawah, batasKanan, batasKiri;
     public float kecepatan;
     public string Verticalaxis, Horizontalaxis;
-
-
+    
     // Use this for initialization 
     void Start()
     {
