@@ -1,19 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 [System.Serializable]
 public class FlagChoice
 {
-    public Button button;         // Tombol untuk klik
-    public Image flagImage;       // Gambar benderanya
-    public Image highlightImage;  // Panel warna di belakang bendera
+    public Button button;
+    public Image flagImage;
+    public Image highlightImage;
 }
 
 public class SegmentUI : MonoBehaviour
 {
     [Header("Flag Choices")]
-    public FlagChoice[] flagChoices;      // FlagChoice array (button + flag image + highlight)
+    public FlagChoice[] flagChoices;
 
     [Header("Audio")]
     public Button speakerButton;
@@ -24,52 +23,54 @@ public class SegmentUI : MonoBehaviour
 
     [Header("UI")]
     public Text scoreText;
-    public Button nextButton;
-
-    [Header("Exit Popup")]
-    public GameObject exitPopup;
-    public Button btnYes;
-    public Button btnNo;
-
-    [Header("Finish Popup")]
-public GameObject finishPopup;
-public Text finalScoreText;
+    public GameObject funFactPanel;
+    public Text funFactText;
+    public Button funFactNextButton;
+    public GameObject gameOverPanel;
+    public Text finalScoreText;
 
     private string correctAnswer;
     private int score = 0;
     private int streak = 0;
 
+    private SegmentData currentSegment;
+
     void Start()
     {
         scoreText.text = "Score: 0";
+
+        if (funFactNextButton != null)
+        {
+            funFactNextButton.onClick.AddListener(OnClickNextFromFunFact);
+        }
+
+        if (funFactPanel != null)
+        {
+            funFactPanel.SetActive(false);
+        }
     }
 
     public void SetSegment(SegmentData segment)
     {
+        currentSegment = segment;
         correctAnswer = segment.correctFlagName;
         audioSource.clip = segment.greetingAudio;
 
         for (int i = 0; i < flagChoices.Length; i++)
         {
-            // Set gambar bendera
             flagChoices[i].flagImage.sprite = segment.flagChoices[i];
-
-            // Reset warna highlight
             flagChoices[i].highlightImage.color = Color.clear;
 
             string flagName = segment.flagChoices[i].name;
-
-            // Clear listener sebelumnya
             flagChoices[i].button.onClick.RemoveAllListeners();
-
-            // Tambahkan listener baru
             flagChoices[i].button.onClick.AddListener(() => CheckAnswer(flagName));
-
-            // Aktifkan lagi tombolnya
             flagChoices[i].button.interactable = true;
         }
 
-        nextButton.gameObject.SetActive(false);
+        if (funFactPanel != null)
+        {
+            funFactPanel.SetActive(false);
+        }
     }
 
     public void PlayGreeting()
@@ -82,7 +83,6 @@ public Text finalScoreText;
 
     public void CheckAnswer(string selectedFlagName)
     {
-        // Disable semua tombol
         foreach (var choice in flagChoices)
         {
             choice.button.interactable = false;
@@ -97,25 +97,21 @@ public Text finalScoreText;
             if (flagName == correctAnswer)
             {
                 flagChoices[i].highlightImage.color = Color.green;
-                Debug.Log("Correct highlight color applied.");
             }
             else if (flagName == selectedFlagName)
             {
                 flagChoices[i].highlightImage.color = Color.red;
-                Debug.Log("Wrong highlight color applied.");
             }
         }
 
         if (isCorrect)
         {
             score += 10;
-            streak += 1;
+            streak++;
             if (streak > 1)
             {
-                score += 5; // bonus streak
-                Debug.Log($"Streak bonus! Streak: {streak}");
+                score += 5;
             }
-
             sfxSource.PlayOneShot(correctSFX);
         }
         else
@@ -125,18 +121,37 @@ public Text finalScoreText;
         }
 
         scoreText.text = "Score: " + score;
-        nextButton.gameObject.SetActive(true);
-    }
-public void ShowFinishPopup()
-{
-    finishPopup.SetActive(true);
-    Time.timeScale = 0f;
 
-    if (finalScoreText != null)
-        finalScoreText.text = "Score Akhir: " + score;
-}
-    public void NextSegment()
+        ShowFunFact(currentSegment.funFact);
+    }
+
+    void ShowFunFact(string fact)
     {
+        if (funFactPanel != null)
+        {
+            funFactText.text = fact;
+            funFactPanel.SetActive(true);
+        }
+    }
+
+    public void OnClickNextFromFunFact()
+    {
+        if (funFactPanel != null)
+        {
+            funFactPanel.SetActive(false);
+        }
+
         GameManager.Instance.LoadNextSegment();
+    }
+
+    public void ShowFinishPopup()
+    {
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+
+        if (finalScoreText != null)
+        {
+            finalScoreText.text = "Score Akhir: " + score;
+        }
     }
 }
