@@ -15,6 +15,8 @@ public class SceneManagement : MonoBehaviour
     public GameObject pausePanel;
     public Button pauseButton; // 👉 Reference to your Pause button
 
+    [Header("Finish Game UI")]
+    public GameObject finishPopup;
     private bool isPaused = false;
 
     void Start()
@@ -130,4 +132,16 @@ public class SceneManagement : MonoBehaviour
             Debug.Log("Game is exiting");
         }
     }
+        // 🔥 Tambahan: Menampilkan popup saat menyelesaikan game
+    public void FinishGame()
+    {
+        if (finishPopup != null)
+        {
+            finishPopup.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+
+
 }
+
