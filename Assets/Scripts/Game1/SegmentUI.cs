@@ -1,31 +1,43 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
+[System.Serializable]
+public class FlagChoice
+{
+    public Button button;         // Tombol untuk klik
+    public Image flagImage;       // Gambar benderanya
+    public Image highlightImage;  // Panel warna di belakang bendera
+}
 
 public class SegmentUI : MonoBehaviour
 {
-    public Image[] flagButtons;          // Image components for flag choices
-    public Button[] flagButtonRefs;      // Button components for interactivity
-    public Button speakerButton;         // Button to play audio
-    public AudioSource audioSource;      // AudioSource for greeting audio
-    public AudioSource sfxSource;        // AudioSource for playing SFX (one-shot)
-    public AudioClip correctSFX;         // Sound effect for a correct answer
-    public AudioClip wrongSFX;           // Sound effect for a wrong answer
-    public Text scoreText;               // Score display
-    public Button nextButton;            // Next segment button (Initially hidden)
+    [Header("Flag Choices")]
+    public FlagChoice[] flagChoices;      // FlagChoice array (button + flag image + highlight)
 
-    private string correctAnswer;        // Stores the correct flag name
-    private int score = 0;               // Player's score
-    private int streak = 0;              // Correct answer streak
+    [Header("Audio")]
+    public Button speakerButton;
+    public AudioSource audioSource;
+    public AudioSource sfxSource;
+    public AudioClip correctSFX;
+    public AudioClip wrongSFX;
 
-    // 🔹 Exit Popup UI Components (Optional)
+    [Header("UI")]
+    public Text scoreText;
+    public Button nextButton;
+
+    [Header("Exit Popup")]
     public GameObject exitPopup;
     public Button btnYes;
     public Button btnNo;
 
+    private string correctAnswer;
+    private int score = 0;
+    private int streak = 0;
+
     void Start()
     {
-        scoreText.text = "Score: " + score; // Show score on start
-        nextButton.gameObject.SetActive(false);
+        scoreText.text = "Score: 0";
     }
 
     public void SetSegment(SegmentData segment)
@@ -33,17 +45,24 @@ public class SegmentUI : MonoBehaviour
         correctAnswer = segment.correctFlagName;
         audioSource.clip = segment.greetingAudio;
 
-        for (int i = 0; i < flagButtons.Length; i++)
+        for (int i = 0; i < flagChoices.Length; i++)
         {
-            flagButtons[i].sprite = segment.flagChoices[i];
+            // Set gambar bendera
+            flagChoices[i].flagImage.sprite = segment.flagChoices[i];
+
+            // Reset warna highlight
+            flagChoices[i].highlightImage.color = Color.clear;
 
             string flagName = segment.flagChoices[i].name;
-            flagButtonRefs[i].onClick.RemoveAllListeners();
-            flagButtonRefs[i].onClick.AddListener(() => CheckAnswer(flagName));
-            flagButtonRefs[i].interactable = true;
 
-            // Reset the flag image color
-            flagButtons[i].color = Color.white;
+            // Clear listener sebelumnya
+            flagChoices[i].button.onClick.RemoveAllListeners();
+
+            // Tambahkan listener baru
+            flagChoices[i].button.onClick.AddListener(() => CheckAnswer(flagName));
+
+            // Aktifkan lagi tombolnya
+            flagChoices[i].button.interactable = true;
         }
 
         nextButton.gameObject.SetActive(false);
@@ -59,57 +78,50 @@ public class SegmentUI : MonoBehaviour
 
     public void CheckAnswer(string selectedFlagName)
     {
-        // Disable all buttons to prevent multiple answers
-        foreach (Button btn in flagButtonRefs)
+        // Disable semua tombol
+        foreach (var choice in flagChoices)
         {
-            btn.interactable = false;
+            choice.button.interactable = false;
         }
 
         bool isCorrect = selectedFlagName == correctAnswer;
 
-        for (int i = 0; i < flagButtons.Length; i++)
+        for (int i = 0; i < flagChoices.Length; i++)
         {
-            string btnName = flagButtons[i].sprite.name;
+            string flagName = flagChoices[i].flagImage.sprite.name;
 
-            if (btnName == correctAnswer)
+            if (flagName == correctAnswer)
             {
-                flagButtons[i].color = Color.green;
-                Debug.Log($"✅ Flag '{btnName}' turned GREEN (Correct)");
+                flagChoices[i].highlightImage.color = Color.green;
+                Debug.Log("Correct highlight color applied.");
             }
-
-            if (btnName == selectedFlagName && !isCorrect)
+            else if (flagName == selectedFlagName)
             {
-                flagButtons[i].color = Color.red;
-                Debug.Log($"❌ Flag '{btnName}' turned RED (Wrong)");
+                flagChoices[i].highlightImage.color = Color.red;
+                Debug.Log("Wrong highlight color applied.");
             }
         }
 
-        // Scoring
         if (isCorrect)
         {
-            Debug.Log("Correct! 🎉");
             score += 10;
-            streak++;
-            if (streak >= 3)
+            streak += 1;
+            if (streak > 1)
             {
-                Debug.Log("🔥 Streak bonus!");
-                score += 5;
+                score += 5; // bonus streak
+                Debug.Log($"Streak bonus! Streak: {streak}");
             }
 
-            if (correctSFX != null)
-                sfxSource.PlayOneShot(correctSFX);
+            sfxSource.PlayOneShot(correctSFX);
         }
         else
         {
-            Debug.Log("Wrong! ❌");
             streak = 0;
-
-            if (wrongSFX != null)
-                sfxSource.PlayOneShot(wrongSFX);
+            sfxSource.PlayOneShot(wrongSFX);
         }
 
         scoreText.text = "Score: " + score;
-        nextButton.gameObject.SetActive(true); // Show next button
+        nextButton.gameObject.SetActive(true);
     }
 
     public void NextSegment()
