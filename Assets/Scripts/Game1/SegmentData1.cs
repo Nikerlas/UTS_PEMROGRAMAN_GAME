@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SegmentData", menuName = "Game/Segment")]
-public class SegmentData : ScriptableObject
+[CreateAssetMenu(fileName = "SegmentData1", menuName = "Game/SegmentMakanan")]
+public class SegmentData1 : ScriptableObject
 {
-    public AudioClip greetingAudio;
-    public string correctCountry;
-    public Sprite[] flagChoices;
-    public string correctFlagName;
+    
+    public Sprite[] imagesNew;
+    public string correctFoodName;
+    public Sprite[] foodChoices;
     public string funFact;
 }
