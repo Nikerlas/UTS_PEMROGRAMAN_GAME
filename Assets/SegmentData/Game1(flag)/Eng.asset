@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7438d7f95e7af884eb14236689096869, type: 3}
-  m_Name: Japanese
+  m_Name: Eng
   m_EditorClassIdentifier: 
-  greetingAudio: {fileID: 8300000, guid: 08250516e5082ca4d87cb8850fafa33f, type: 3}
-  correctCountry: Japan
+  greetingAudio: {fileID: 8300000, guid: de530164cc5fab740a625b8eca315a45, type: 3}
+  correctCountry: America
   flagChoices:
-  - {fileID: 21300000, guid: 83ac916b1c6d60b45aefdc740404a697, type: 3}
+  - {fileID: 21300000, guid: 2d18703322fdf9d4fb138ad7659b8bec, type: 3}
+  - {fileID: 21300000, guid: 74bc97d51cdf2254f818bcaa668d0632, type: 3}
   - {fileID: 21300000, guid: 0fce21f3c82c05a41901ba6463520c19, type: 3}
-  - {fileID: 21300000, guid: 3b6fe3d5d9209cc45883129889abbbb4, type: 3}
-  - {fileID: 21300000, guid: 2a7a4a69690029740b4b38601eb0c285, type: 3}
-  correctFlagName: Japan
-  funFact: 
+  - {fileID: 21300000, guid: 83ac916b1c6d60b45aefdc740404a697, type: 3}
+  correctFlagName: America
+  funFact: Hello adalah sapaan dari Amerika

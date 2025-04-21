@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7438d7f95e7af884eb14236689096869, type: 3}
-  m_Name: French
+  m_Name: Indo
   m_EditorClassIdentifier: 
-  greetingAudio: {fileID: 8300000, guid: 0db853be59f33e94397bc9afeb373f7f, type: 3}
-  correctCountry: France
+  greetingAudio: {fileID: 8300000, guid: b7e884b115eab0245a06fb0966b638f4, type: 3}
+  correctCountry: Indonesia
   flagChoices:
-  - {fileID: 21300000, guid: a28a3e5c59ffe9d40809efdfc232f69e, type: 3}
   - {fileID: 21300000, guid: 74bc97d51cdf2254f818bcaa668d0632, type: 3}
-  - {fileID: 21300000, guid: 3b6fe3d5d9209cc45883129889abbbb4, type: 3}
   - {fileID: 21300000, guid: 2a4ef5646a40ec940b266fc0327d8265, type: 3}
-  correctFlagName: France
-  funFact: 
+  - {fileID: 21300000, guid: 2a7a4a69690029740b4b38601eb0c285, type: 3}
+  - {fileID: 21300000, guid: 0fce21f3c82c05a41901ba6463520c19, type: 3}
+  correctFlagName: Indonesia
+  funFact: Selamat Pagi adalah sapaan dari Indonesia
