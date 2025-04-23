@@ -1,103 +1,119 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BallController : MonoBehaviour
 {
-    int scoreP1;
-    int scoreP2;
+    public int force = 300;
+    public AudioClip hitSound;
+    public AudioClip goalWhistle;
+    public GoalPanelAnimator goalPanelAnimator;
+    int scoreP1 = 0;
+    int scoreP2 = 0;
 
     Text scoreUIP1;
     Text scoreUIP2;
 
-    AudioSource audioPlay;
-    public AudioClip hitSound;
-
+    AudioSource audioSource;
     GameObject panelSelesai;
     Text txtPemenang;
 
-    public int force;
     Rigidbody2D rb;
-    // Start is called before the first frame update
+    GameObject paddle1, paddle2;
+    Vector2 initialBallPos = Vector2.zero;
+    Vector2 initialPaddle1Pos;
+    Vector2 initialPaddle2Pos;
+
     void Start()
     {
-        scoreP1 = 0;
-        scoreP2 = 0;
-
         rb = GetComponent<Rigidbody2D>();
-        Vector2 arah = new Vector2(2, 0).normalized;
-        rb.AddForce(arah * force);
-
-        audioPlay = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         scoreUIP1 = GameObject.Find("Score1").GetComponent<Text>();
         scoreUIP2 = GameObject.Find("Score2").GetComponent<Text>();
-
         panelSelesai = GameObject.Find("PanelSelesai");
+        txtPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
         panelSelesai.SetActive(false);
+
+        paddle1 = GameObject.Find("Paddle1");
+        paddle2 = GameObject.Find("Paddle2");
+
+        initialPaddle1Pos = paddle1.transform.position;
+        initialPaddle2Pos = paddle2.transform.position;
+
+        StartCoroutine(StartGame());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StartGame()
     {
-        
+        yield return new WaitForSeconds(0.5f);
+        Vector2 arah = new Vector2(Random.Range(0, 2) == 0 ? -1 : 1, 0).normalized;
+        rb.AddForce(arah * force);
     }
-    
-    private void OnCollisionEnter2D(Collision2D coll)
+
+    void OnCollisionEnter2D(Collision2D coll)
     {
-        audioPlay.PlayOneShot(hitSound);
-        if(coll.gameObject.name == "Kanan")
+        if (coll.gameObject.name == "Kanan")
         {
-            scoreP1 += 1;
+            scoreP1++;
             TampilkanScore();
-            if(scoreP1 == 5)
+
+            if (scoreP1 == 5)
             {
                 panelSelesai.SetActive(true);
-                txtPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
                 txtPemenang.text = "Player 1 Menang!";
                 Destroy(gameObject);
-                return;
             }
-            ResetBall();
-            Vector2 arah = new Vector2(2, 0).normalized;
-            rb.AddForce(arah * force);
+            else
+            {
+                StartCoroutine(HandleGoal(true));
+            }
         }
-        if(coll.gameObject.name == "Kiri")
+        else if (coll.gameObject.name == "Kiri")
         {
-            scoreP2 += 1;
+            scoreP2++;
             TampilkanScore();
-            if(scoreP2 == 5)
+
+            if (scoreP2 == 5)
             {
                 panelSelesai.SetActive(true);
-                txtPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
                 txtPemenang.text = "Player 2 Menang!";
                 Destroy(gameObject);
-                return;
             }
-            ResetBall();
-            Vector2 arah = new Vector2(-2, 0).normalized;
-            rb.AddForce(arah * force);
+            else
+            {
+                StartCoroutine(HandleGoal(false));
+            }
         }
-        if(coll.gameObject.name == "Paddle1" || coll.gameObject.name == "Paddle2")
+        else if (coll.gameObject.name == "Paddle1" || coll.gameObject.name == "Paddle2")
         {
+            audioSource.PlayOneShot(hitSound);
             float sudut = (transform.position.y - coll.transform.position.y) * 5f;
             Vector2 arah = new Vector2(rb.velocity.x, sudut).normalized;
-            rb.velocity = new Vector2(0, 0);
+            rb.velocity = Vector2.zero;
             rb.AddForce(arah * force * 2);
         }
     }
 
-    void ResetBall()
+    IEnumerator HandleGoal(bool leftToRight)
     {
-        transform.localPosition = new Vector2(0, 0);
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = Vector2.zero;
+        transform.position = initialBallPos;
+        paddle1.transform.position = initialPaddle1Pos;
+        paddle2.transform.position = initialPaddle2Pos;
+
+        goalPanelAnimator.PlayGoalAnimation(leftToRight);
+        audioSource.PlayOneShot(goalWhistle);
+
+        yield return new WaitForSeconds(2f);
+        Vector2 arah = new Vector2(leftToRight ? -1 : 1, 0).normalized;
+        rb.AddForce(arah * force);
     }
 
     void TampilkanScore()
     {
-        Debug.Log("Score P1: " + scoreP1 + " Score P2: " + scoreP2);
-        scoreUIP1.text = scoreP1 + "";
-        scoreUIP2.text = scoreP2 + "";
+        scoreUIP1.text = scoreP1.ToString();
+        scoreUIP2.text = scoreP2.ToString();
     }
+
 }
