@@ -1,35 +1,39 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [Header("Data Segmen")]
-    public List<SegmentData> segments;        // Daftar semua soal
+    public List<SegmentData> allSegments; // Semua segmen tersedia
+    private List<SegmentData> shuffledSegments; // Daftar segmen yang sudah diacak
     private int currentSegmentIndex = 0;
 
     [Header("UI Handler")]
-    public SegmentUI segmentUI;               // Referensi ke SegmentUI
+    public SegmentUI segmentUI;
 
     private void Awake()
     {
-        // Singleton pattern
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Opsional jika ingin bertahan lintas scene
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
-        if (segments.Count > 0)
+        if (shuffledSegments == null || shuffledSegments.Count == 0)
         {
+            ShuffleSegments();
+        }
+
+        if (segmentUI == null)
+        {
+            segmentUI = FindObjectOfType<SegmentUI>();
+        }
+
+        if (shuffledSegments.Count > 0)
+        {
+            // Langsung panggil LoadSegment tanpa menaikkan indeks
             LoadSegment(currentSegmentIndex);
         }
         else
@@ -38,11 +42,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // 🔀 Mengacak daftar segmen
+    private void ShuffleSegments()
+    {
+        shuffledSegments = new List<SegmentData>(allSegments);
+        for (int i = 0; i < shuffledSegments.Count; i++)
+        {
+            SegmentData temp = shuffledSegments[i];
+            int randomIndex = Random.Range(i, shuffledSegments.Count);
+            shuffledSegments[i] = shuffledSegments[randomIndex];
+            shuffledSegments[randomIndex] = temp;
+        }
+    }
+
+    // Memuat segmen berdasarkan indeks tertentu dari daftar yang sudah diacak
     public void LoadSegment(int index)
     {
-        if (index >= 0 && index < segments.Count)
+        if (index >= 0 && index < shuffledSegments.Count)
         {
-            segmentUI.SetSegment(segments[index]);
+            segmentUI.SetSegment(shuffledSegments[index]);
         }
         else
         {
@@ -51,11 +70,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Memuat segmen berikutnya
     public void LoadNextSegment()
     {
         currentSegmentIndex++;
 
-        if (currentSegmentIndex < segments.Count)
+        if (currentSegmentIndex < shuffledSegments.Count)
         {
             LoadSegment(currentSegmentIndex);
         }
@@ -65,6 +85,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Menangani akhir permainan
     private void EndGame()
     {
         if (segmentUI != null)
@@ -81,7 +102,9 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         currentSegmentIndex = 0;
+        ShuffleSegments(); // Acak ulang segmen saat restart
         Time.timeScale = 1f;
         LoadSegment(currentSegmentIndex);
+        segmentUI.Start(); // Sembunyikan popup selesai
     }
 }
