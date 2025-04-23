@@ -9,6 +9,6 @@ public class SegmentData1 : ScriptableObject
     
     public Sprite[] imagesNew;
     public string correctFoodName;
-    public Sprite[] foodChoices;
+    public Sprite clueImage;
     public string funFact;
 }

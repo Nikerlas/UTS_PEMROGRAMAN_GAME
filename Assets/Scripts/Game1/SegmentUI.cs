@@ -4,9 +4,9 @@ using UnityEngine.UI;
 [System.Serializable]
 public class FlagChoice
 {
-    public Button button;
-    public Image flagImage;
-    public Image highlightImage;
+    public Button button;         // Tombol untuk klik
+    public Image flagImage;       // Gambar benderanya
+    public Image highlightImage;  // Panel warna di belakang bendera
 }
 
 public class SegmentUI : MonoBehaviour
@@ -23,36 +23,29 @@ public class SegmentUI : MonoBehaviour
 
     [Header("UI")]
     public Text scoreText;
-    public GameObject funFactPanel;
-    public Text funFactText;
-    public Button funFactNextButton;
-    public GameObject gameOverPanel;
-    public Text finalScoreText;
+    public GameObject funFactPanel;       // Panel untuk menampilkan fun fact
+    public Text funFactText;              // Teks fun fact
+    public Button funFactNextButton;      // Tombol Next di panel fun fact
+    public GameObject gameOverPanel;      // Panel game selesai
+    public Text finalScoreText;           // Menampilkan skor akhir
 
     private string correctAnswer;
     private int score = 0;
     private int streak = 0;
 
-    private SegmentData currentSegment;
-
-    void Start()
+    public void Start()
     {
+        gameOverPanel.SetActive(false);
         scoreText.text = "Score: 0";
 
         if (funFactNextButton != null)
         {
             funFactNextButton.onClick.AddListener(OnClickNextFromFunFact);
         }
-
-        if (funFactPanel != null)
-        {
-            funFactPanel.SetActive(false);
-        }
     }
 
     public void SetSegment(SegmentData segment)
     {
-        currentSegment = segment;
         correctAnswer = segment.correctFlagName;
         audioSource.clip = segment.greetingAudio;
 
@@ -62,11 +55,13 @@ public class SegmentUI : MonoBehaviour
             flagChoices[i].highlightImage.color = Color.clear;
 
             string flagName = segment.flagChoices[i].name;
+
             flagChoices[i].button.onClick.RemoveAllListeners();
             flagChoices[i].button.onClick.AddListener(() => CheckAnswer(flagName));
             flagChoices[i].button.interactable = true;
         }
 
+        // Sembunyikan panel fun fact
         if (funFactPanel != null)
         {
             funFactPanel.SetActive(false);
@@ -110,8 +105,9 @@ public class SegmentUI : MonoBehaviour
             streak++;
             if (streak > 1)
             {
-                score += 5;
+                score += 5; // bonus streak
             }
+
             sfxSource.PlayOneShot(correctSFX);
         }
         else
@@ -122,7 +118,8 @@ public class SegmentUI : MonoBehaviour
 
         scoreText.text = "Score: " + score;
 
-        ShowFunFact(currentSegment.funFact);
+        // Tampilkan fun fact
+        ShowFunFact("Fun Fact: Sapaan ini berasal dari " + correctAnswer + "!");
     }
 
     void ShowFunFact(string fact)
@@ -140,8 +137,6 @@ public class SegmentUI : MonoBehaviour
         {
             funFactPanel.SetActive(false);
         }
-
-        GameManager.Instance.LoadNextSegment();
     }
 
     public void ShowFinishPopup()
