@@ -29,6 +29,9 @@ public class SegmentUI : MonoBehaviour
     public GameObject gameOverPanel;
     public Text finalScoreText;
 
+    [Header("Clue")]
+    public Image clueImage;
+
     private string correctAnswer;
     private int score = 0;
     private int streak = 0;
@@ -72,6 +75,30 @@ public class SegmentUI : MonoBehaviour
             funFactPanel.SetActive(false);
         }
     }
+
+    public void SetSegmentMakanan(SegmentData segment)
+{
+    currentSegment = segment;
+    correctAnswer = segment.correctFlagName;
+
+    clueImage.sprite = segment.clueImage;
+
+    for (int i = 0; i < flagChoices.Length; i++)
+    {
+        flagChoices[i].flagImage.sprite = segment.flagChoices[i];
+        flagChoices[i].highlightImage.color = Color.clear;
+
+        string flagName = segment.flagChoices[i].name;
+        flagChoices[i].button.onClick.RemoveAllListeners();
+        flagChoices[i].button.onClick.AddListener(() => CheckAnswer(flagName));
+        flagChoices[i].button.interactable = true;
+    }
+
+    if (funFactPanel != null)
+    {
+        funFactPanel.SetActive(false);
+    }
+}
 
     public void PlayGreeting()
     {
