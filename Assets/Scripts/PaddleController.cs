@@ -15,6 +15,26 @@ public class PaddleController : MonoBehaviour
     public Transform bola;           // Drag objek bola ke sini dari inspector
     public float kecepatanAI = 4f;   // AI bisa beda kecepatannya
 
+    void Start()
+    {
+        if (isAI)
+        {
+            // Ambil difficulty dari ArenaInfo
+            switch (ArenaInfo.selectedDifficulty)
+            {
+                case Difficulty.Easy:
+                    kecepatanAI = 3f;
+                    break;
+                case Difficulty.Medium:
+                    kecepatanAI = 5f;
+                    break;
+                case Difficulty.Hard:
+                    kecepatanAI = 7f;
+                    break;
+            }
+        }
+    }
+
     void Update()
     {
         if (isAI)
