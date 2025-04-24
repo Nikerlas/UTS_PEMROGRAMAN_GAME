@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1290,6 +1291,9 @@ MonoBehaviour:
   kecepatan: 7
   axis: Vertical
   axisX: Horizontal
+  isAI: 1
+  bola: {fileID: 1472397801}
+  kecepatanAI: 2
 --- !u!212 &611389685
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1644,6 +1648,9 @@ MonoBehaviour:
   kecepatan: 7
   axis: Vertical1
   axisX: Horizontal1
+  isAI: 0
+  bola: {fileID: 0}
+  kecepatanAI: 4
 --- !u!212 &713486065
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2449,10 +2456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d034305094cc94b9af07a452f5b50d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 200
   hitSound: {fileID: 8300000, guid: 116a6c64320dc83428874773b30e7fda, type: 3}
-  goalWhistle: {fileID: 0}
-  goalPanelAnimator: {fileID: 0}
+  peluitClip: {fileID: 0}
+  force: 200
 --- !u!58 &1472397798
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3232,70 +3238,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1750438277
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1750438280}
-  - component: {fileID: 1750438279}
-  - component: {fileID: 1750438278}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!225 &1750438278
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750438277}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &1750438279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750438277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2d8fd81317395489b7b8f3d83db1a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panelTransform: {fileID: 1514071601}
-  canvasGroup: {fileID: 1750438278}
-  startPosition: {x: 0, y: 0}
-  endPosition: {x: 0, y: 0}
-  animationDuration: 1
-  stayDuration: 1.5
-  duration: 1
---- !u!4 &1750438280
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750438277}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3134292, y: 0.57981926, z: -0.05008552}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811934819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3940,4 +3882,3 @@ SceneRoots:
   - {fileID: 733307502}
   - {fileID: 1106789490}
   - {fileID: 1507964130}
-  - {fileID: 1750438280}
