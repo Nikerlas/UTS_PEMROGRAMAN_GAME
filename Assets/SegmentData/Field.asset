@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6b3c6dafac2e864d977a4de9d0ed7b2, type: 3}
-  m_Name: SepakBola
+  m_Name: Field
   m_EditorClassIdentifier: 
   namaArena: Regular Field
   previewImage: {fileID: 21300000, guid: 1aae1b8c23d18644bbe18c7fb9860c81, type: 3}
@@ -18,5 +18,5 @@ MonoBehaviour:
   paddle1Prefab: {fileID: 7482632509317119778, guid: aa526f9c7ed7b4a4b9a66d8de062efe8, type: 3}
   paddle2Prefab: {fileID: 6546235131060654945, guid: 63651f7446147ee4a91bec6acfc63bed, type: 3}
   fieldBackground: {fileID: 21300000, guid: 1a339f05451060f4daee4b085a9ff532, type: 3}
-  bgm: {fileID: 0}
+  bgm: {fileID: 8300000, guid: eb9391dffa8381547ab7e81ea7b5ecdf, type: 3}
   difficulty: 0

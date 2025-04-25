@@ -23,13 +23,13 @@ public class PaddleController : MonoBehaviour
             switch (ArenaInfo.selectedDifficulty)
             {
                 case Difficulty.Easy:
-                    kecepatanAI = 3f;
+                    kecepatanAI = 2f;
                     break;
                 case Difficulty.Medium:
-                    kecepatanAI = 5f;
+                    kecepatanAI = 3f;
                     break;
                 case Difficulty.Hard:
-                    kecepatanAI = 7f;
+                    kecepatanAI = 4f;
                     break;
             }
         }

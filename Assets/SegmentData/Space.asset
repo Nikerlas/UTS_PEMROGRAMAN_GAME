@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6b3c6dafac2e864d977a4de9d0ed7b2, type: 3}
-  m_Name: SepakBola 1
+  m_Name: Space
   m_EditorClassIdentifier: 
-  namaArena: Space
-  previewImage: {fileID: 21300000, guid: 1aae1b8c23d18644bbe18c7fb9860c81, type: 3}
+  namaArena: Regular Field
+  previewImage: {fileID: 21300000, guid: 595b94ad96f6aa74aa32573b9f9e839a, type: 3}
   bolaPrefab: {fileID: 5220192310669817703, guid: 1cb960dd2e2af804981f54805b86964f, type: 3}
   paddle1Prefab: {fileID: 7482632509317119778, guid: aa526f9c7ed7b4a4b9a66d8de062efe8, type: 3}
   paddle2Prefab: {fileID: 6546235131060654945, guid: 63651f7446147ee4a91bec6acfc63bed, type: 3}
-  fieldBackground: {fileID: 21300000, guid: 1a339f05451060f4daee4b085a9ff532, type: 3}
-  bgm: {fileID: 0}
+  fieldBackground: {fileID: 21300000, guid: f9902f0b7f3afea4683ee50284a1b005, type: 3}
+  bgm: {fileID: 8300000, guid: 38b209799e61e5a45976b9f716aa0c83, type: 3}
   difficulty: 1

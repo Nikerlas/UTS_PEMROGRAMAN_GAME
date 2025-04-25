@@ -1578,8 +1578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arenaList:
   - {fileID: 11400000, guid: 7046811db8bb3294f919f0fd978af59d, type: 2}
-  - {fileID: 11400000, guid: 61edd4b164fba204e97d6e6776c5b675, type: 2}
-  - {fileID: 11400000, guid: 33bfbaf962fa4c54886d6aec8aa7caed, type: 2}
+  - {fileID: 11400000, guid: 5cc6bf397213bd9469cb668b8b01281a, type: 2}
   arenaPreview: {fileID: 1375343181}
   arenaNameText: {fileID: 977810475}
   difficultyText: {fileID: 1939962161}
