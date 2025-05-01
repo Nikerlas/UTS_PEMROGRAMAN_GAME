@@ -6,6 +6,8 @@ TagManager:
   tags:
   - paddle
   - batas
+  - Darat
+  - Air
   layers:
   - Default
   - TransparentFX
