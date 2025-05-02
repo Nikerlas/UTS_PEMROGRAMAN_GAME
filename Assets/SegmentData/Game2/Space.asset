@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b3c6dafac2e864d977a4de9d0ed7b2, type: 3}
   m_Name: Space
   m_EditorClassIdentifier: 
-  namaArena: Regular Field
+  namaArena: Space
   previewImage: {fileID: 21300000, guid: 595b94ad96f6aa74aa32573b9f9e839a, type: 3}
   bolaPrefab: {fileID: 5220192310669817703, guid: 1cb960dd2e2af804981f54805b86964f, type: 3}
   paddle1Prefab: {fileID: 7482632509317119778, guid: aa526f9c7ed7b4a4b9a66d8de062efe8, type: 3}

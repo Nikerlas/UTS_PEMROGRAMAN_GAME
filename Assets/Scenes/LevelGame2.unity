@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1579,6 +1578,7 @@ MonoBehaviour:
   arenaList:
   - {fileID: 11400000, guid: 7046811db8bb3294f919f0fd978af59d, type: 2}
   - {fileID: 11400000, guid: 5cc6bf397213bd9469cb668b8b01281a, type: 2}
+  - {fileID: 11400000, guid: b7da03f93cf387345a5288cc7762c643, type: 2}
   arenaPreview: {fileID: 1375343181}
   arenaNameText: {fileID: 977810475}
   difficultyText: {fileID: 1939962161}

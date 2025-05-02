@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SelectGame : MonoBehaviour
 {
     public GameObject[] gameButtons;
-    public Button prevButton, nextButton, secretGame;
+    public Button prevButton, nextButton;
 
     public string[] sceneNames; // 👈 Add this in the Inspector
     private int currentIndex = 0;
@@ -54,8 +54,6 @@ public class SelectGame : MonoBehaviour
 
         prevButton.interactable = currentIndex > 0;
         nextButton.interactable = currentIndex < gameButtons.Length - 1;
-
-        secretGame.interactable = false; // Leave secret alone
     }
 
     public void StartSelectedGame()

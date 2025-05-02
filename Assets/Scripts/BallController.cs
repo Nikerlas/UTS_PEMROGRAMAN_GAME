@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class BallController : MonoBehaviour
 {
-    int scoreP1;
-    int scoreP2;
+    int livesP1;
+    int livesP2;
+    int maxLives = 5;
 
-    Text scoreUIP1;
-    Text scoreUIP2;
+    Slider hpBarP1;
+    Slider hpBarP2;
 
     AudioSource audioPlay;
     public AudioClip hitSound;
@@ -32,14 +33,20 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
-        scoreP1 = 0;
-        scoreP2 = 0;
+        livesP1 = maxLives;
+        livesP2 = maxLives;
 
         rb = GetComponent<Rigidbody2D>();
         audioPlay = GetComponent<AudioSource>();
 
-        scoreUIP1 = GameObject.Find("Score1").GetComponent<Text>();
-        scoreUIP2 = GameObject.Find("Score2").GetComponent<Text>();
+        hpBarP1 = GameObject.Find("HPBarP1").GetComponent<Slider>();
+        hpBarP2 = GameObject.Find("HPBarP2").GetComponent<Slider>();
+
+        hpBarP1.maxValue = maxLives;
+        hpBarP2.maxValue = maxLives;
+
+        hpBarP1.value = livesP1;
+        hpBarP2.value = livesP2;
 
         panelSelesai = GameObject.Find("PanelSelesai");
         panelSelesai.SetActive(false);
@@ -48,7 +55,7 @@ public class BallController : MonoBehaviour
         panelGoal.SetActive(false);
 
         startPos = transform.localPosition;
-    
+
         paddle1 = GameObject.Find("Paddle1(Clone)");
         paddle2 = GameObject.Find("Paddle2(Clone)");
         paddle1StartPos = paddle1.transform.localPosition;
@@ -63,10 +70,10 @@ public class BallController : MonoBehaviour
         if (coll.gameObject.name == "GawangKanan")
         {
             audioPlay.PlayOneShot(goalSound);
-            scoreP1 += 1;
-            TampilkanScore();
+            livesP2 -= 1;
+            TampilkanLives();
 
-            if (scoreP1 == 5)
+            if (livesP2 <= 0)
             {
                 panelSelesai.SetActive(true);
                 txtPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
@@ -74,26 +81,25 @@ public class BallController : MonoBehaviour
                 Destroy(gameObject);
                 return;
             }
+
             StartCoroutine(TampilkanGoalDanReset(1));
         }
         else if (coll.gameObject.name == "GawangKiri")
         {
             audioPlay.PlayOneShot(goalSound);
-            
-            scoreP2 += 1;
-            TampilkanScore();
+            livesP1 -= 1;
+            TampilkanLives();
 
-            if (scoreP2 == 5)
+            if (livesP1 <= 0)
             {
                 panelSelesai.SetActive(true);
                 txtPemenang = GameObject.Find("Pemenang").GetComponent<Text>();
                 txtPemenang.text = "Player 2 Menang!";
-                audioPlay.PlayOneShot(goalSound);
                 Destroy(gameObject);
                 return;
             }
-            StartCoroutine(TampilkanGoalDanReset(-1));
 
+            StartCoroutine(TampilkanGoalDanReset(-1));
         }
         else if (coll.gameObject.name == "Paddle1" || coll.gameObject.name == "Paddle2")
         {
@@ -117,10 +123,10 @@ public class BallController : MonoBehaviour
         }
     }
 
-    void TampilkanScore()
+    void TampilkanLives()
     {
-        scoreUIP1.text = scoreP1.ToString();
-        scoreUIP2.text = scoreP2.ToString();
+        hpBarP1.value = livesP1;
+        hpBarP2.value = livesP2;
     }
 
     IEnumerator TampilkanGoalDanReset(int arahX)
@@ -140,14 +146,12 @@ public class BallController : MonoBehaviour
         paddle1.transform.localPosition = paddle1StartPos;
         paddle2.transform.localPosition = paddle2StartPos;
 
-        // Nonaktifkan kontrol paddle (ganti PaddleController dengan script kamu)
         paddle1.GetComponent<PaddleController>().enabled = false;
         paddle2.GetComponent<PaddleController>().enabled = false;
 
         yield return new WaitForSeconds(4f);
         audioPlay.PlayOneShot(peluitClip);
 
-        // Aktifkan kembali kontrol paddle
         paddle1.GetComponent<PaddleController>().enabled = true;
         paddle2.GetComponent<PaddleController>().enabled = true;
 

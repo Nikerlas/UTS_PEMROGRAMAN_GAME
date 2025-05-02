@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b3c6dafac2e864d977a4de9d0ed7b2, type: 3}
+  m_Name: TheLandBetween
+  m_EditorClassIdentifier: 
+  namaArena: Land Between
+  previewImage: {fileID: 21300000, guid: 5ce77971dc885004c961ed2dab76d930, type: 3}
+  bolaPrefab: {fileID: 5220192310669817703, guid: 8ceb3a4d1774d364b878e3d4fdd3df0e, type: 3}
+  paddle1Prefab: {fileID: 7482632509317119778, guid: aa526f9c7ed7b4a4b9a66d8de062efe8, type: 3}
+  paddle2Prefab: {fileID: 6546235131060654945, guid: 63651f7446147ee4a91bec6acfc63bed, type: 3}
+  fieldBackground: {fileID: 21300000, guid: 687b9d46e12e5ae488419b0290d1d044, type: 3}
+  bgm: {fileID: 8300000, guid: 211d2ad66c4822e48b3b6b3d055c0f8c, type: 3}
+  difficulty: 2
