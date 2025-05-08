@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class BallController : MonoBehaviour
 {
+    Vector2 lastPosition;
+    float stuckTimer = 0f;
+    float stuckThreshold = 2f; // waktu dalam detik sebelum dianggap stuck
+    float minimalMovement = 0.05f; // toleransi gerakan
+
     int livesP1;
     int livesP2;
     int maxLives = 5;
@@ -65,6 +70,29 @@ public class BallController : MonoBehaviour
         MulaiPermainan(1);
     }
 
+    void Update()
+    {
+        if (Vector2.Distance(transform.localPosition, lastPosition) < minimalMovement)
+        {
+            stuckTimer += Time.deltaTime;
+
+            if (stuckTimer >= stuckThreshold)
+            {
+                // Tambahkan dorongan acak kecil ke arah horizontal
+                Vector2 arah = new Vector2(Random.Range(-1f, 1f), Random.Range(-0.3f, 0.3f)).normalized;
+                rb.AddForce(arah * force);
+
+                stuckTimer = 0f; // reset timer setelah memberi dorongan
+            }
+        }
+        else
+        {
+            stuckTimer = 0f; // reset jika bola bergerak
+        }
+
+        lastPosition = transform.localPosition;
+    }
+
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.name == "GawangKanan")
@@ -101,7 +129,7 @@ public class BallController : MonoBehaviour
 
             StartCoroutine(TampilkanGoalDanReset(-1));
         }
-        else if (coll.gameObject.name == "Paddle1" || coll.gameObject.name == "Paddle2")
+        else if (coll.gameObject.name == "Paddle1(Clone)" || coll.gameObject.name == "Paddle2(Clone)" || coll.gameObject.name == "Atas" || coll.gameObject.name == "Bawah" || coll.gameObject.name == "KiriAtas" || coll.gameObject.name == "KananBawah" || coll.gameObject.name == "KiriBawah" || coll.gameObject.name == "KananAtas")
         {
             audioPlay.PlayOneShot(hitSound);
 

@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
     {
         string sceneName = scene.name;
 
-        if (sceneName == "Menu" || sceneName == "Level" || sceneName == "Credit")
+        if (sceneName == "Menu" || sceneName == "Level" || sceneName == "LevelGame2" || sceneName == "Credit")
         {
             if (audioSource.clip != menuAndLevelMusic)
             {
