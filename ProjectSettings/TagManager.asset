@@ -8,6 +8,7 @@ TagManager:
   - batas
   - Darat
   - Air
+  - Bomb
   layers:
   - Default
   - TransparentFX

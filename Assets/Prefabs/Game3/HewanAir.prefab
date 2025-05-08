@@ -100,16 +100,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: cc6527b9458365a4baf3da96e24c7348, type: 3}
-  - {fileID: 21300000, guid: 5e173f03ca75a8347964c67828d099ac, type: 3}
-  - {fileID: 21300000, guid: c9dd01e64e35baa4f9cbf48183ada010, type: 3}
-  - {fileID: 21300000, guid: 99c21add6be5acb4182488c1414af99c, type: 3}
-  - {fileID: 21300000, guid: 8a9dec2438ede474a853891778f13820, type: 3}
-  - {fileID: 21300000, guid: 0b62feb52644e03459352a6b0d4f9c85, type: 3}
-  - {fileID: 21300000, guid: 8479b7ceb0365534eae16e75a68216cd, type: 3}
-  - {fileID: 21300000, guid: e8269310f9ea9704eb4bbc0f71cc585c, type: 3}
-  - {fileID: 21300000, guid: 2ba0120cff98e884a903d1a41dc60b3a, type: 3}
-  - {fileID: 21300000, guid: 39b67e332877341449d00aa546f98540, type: 3}
+  - {fileID: 21300000, guid: df9e37298013e9c439c38ec2248fe1bd, type: 3}
+  - {fileID: 21300000, guid: 155834fde8d228b4a837a790a0effee2, type: 3}
+  - {fileID: 21300000, guid: fbe3c9b65d9e4f041b0888fd81a62eb3, type: 3}
+  - {fileID: 21300000, guid: 457947c415cc52946a40f7810c7458bd, type: 3}
+  - {fileID: 21300000, guid: f7d76c8127039c74599f7858fc6c2927, type: 3}
+  - {fileID: 21300000, guid: ef201402ce5295e468eb338f63a05fdc, type: 3}
+  - {fileID: 21300000, guid: ef122659fc6e2e040b1dd57fe28ddb33, type: 3}
+  - {fileID: 21300000, guid: 49ab486702cdbee4b86c4e0bb3d70400, type: 3}
+  - {fileID: 21300000, guid: 4c2fd97a62671db4c966622b19b87a1c, type: 3}
+  - {fileID: 21300000, guid: 350c30d6b86fd234880a910718485e4a, type: 3}
+  ledakanPrefab: {fileID: 0}
+  panelGameOver: {fileID: 0}
 --- !u!50 &-3467269018890284156
 Rigidbody2D:
   serializedVersion: 4

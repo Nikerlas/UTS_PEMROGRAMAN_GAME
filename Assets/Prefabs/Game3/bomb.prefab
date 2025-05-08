@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8306263787025730246}
   - component: {fileID: 8614078052045847418}
   m_Layer: 0
-  m_Name: HewanDarat
-  m_TagString: Darat
+  m_Name: bomb
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 284f3bcbf7ad6384290e7c7f274067b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d2690c5e9e25af478da566db377df37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
+    oldSize: {x: 6.66, y: 3.75}
     newSize: {x: 5, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -172,15 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 3d06969f01eae0443994b8e12a10db20, type: 3}
-  - {fileID: 21300000, guid: b164b3034537ee648a61eebfd94ade71, type: 3}
-  - {fileID: 21300000, guid: 933b9f20b2da1f5429f13c8eb3846eca, type: 3}
-  - {fileID: 21300000, guid: 433ef2e4d1565f647a58cdc777daa3a2, type: 3}
-  - {fileID: 21300000, guid: 867480f0d93ea3f4d8cee9a0a268afdc, type: 3}
-  - {fileID: 21300000, guid: 152e2433860411647bf0b3dc83ae98b4, type: 3}
-  - {fileID: 21300000, guid: 0cb2db3ea6d1d6e40a186cb9375a9080, type: 3}
-  - {fileID: 21300000, guid: a55bb0d580a648c45b50c9d2cbda07c8, type: 3}
-  - {fileID: 21300000, guid: 1074f05f0e64254478d30f2ae4aea112, type: 3}
-  - {fileID: 21300000, guid: 43e96ddc4b07cd348a542cca3cc64bb7, type: 3}
+  - {fileID: 21300000, guid: 0d2690c5e9e25af478da566db377df37, type: 3}
+  - {fileID: 21300000, guid: fc83df49b323fe8478b7dca3cf3677cc, type: 3}
+  - {fileID: 21300000, guid: c23eb686fb23fc3439c894d1da81e499, type: 3}
   ledakanPrefab: {fileID: 0}
   panelGameOver: {fileID: 0}
